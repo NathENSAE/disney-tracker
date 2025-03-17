@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import WheelComponent from "./components/custom/WheelComponent";
 import "./App.css";
-import { doc, setDoc, getDoc, collection, getDocs, updateDoc } from "firebase/firestore";
+import { doc, setDoc, getDoc, updateDoc } from "firebase/firestore";
 import { db } from "@/firebaseConfig"; // Import Firestore instance
 
 const TMDB_API_KEY = "a352d8dd69841aa3d51bffbdc6088fe4";
