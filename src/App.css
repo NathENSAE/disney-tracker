@@ -45,6 +45,8 @@ h1 {
   display: flex;
   flex-direction: column;
   align-items: center;
+  min-width: 300px; /* Ensure each column has a minimum width */
+  max-width: 600px; /* Limit the maximum width */
 }
 
 /* 🎡 Wheel Styling */
@@ -56,7 +58,7 @@ h1 {
 
 .scrollable-box {
   max-height: 500px;
-  width: 500px;
+  width: 100%;
   overflow-y: auto;
   padding: 1rem;
   border: 1px solid #ccc;
@@ -226,18 +228,55 @@ h1 {
 }
 
 
-/* 🌀 Responsive Design */
+/* Small devices (phones, max-width: 768px) */
 @media (max-width: 768px) {
-  .movie-item {
-    flex-direction: column;
-    text-align: center;
+  .flex {
+    flex-direction: column; /* Stack the wheel and movie list vertically */
+    align-items: center;
+  }
+
+  .scrollable-box {
+    width: 100%; /* Make the movie list take full width */
+    max-height: 300px; /* Reduce height for smaller screens */
+  }
+
+  .wheel-container {
+    width: 100%;
+    max-width: 300px; /* Limit the wheel size */
   }
 
   .movie-image {
-    margin-bottom: 8px;
+    width: 100px;
+    height: 140px; /* Adjust image size for smaller screens */
+  }
+}
+
+/* Medium devices (tablets, max-width: 1024px) */
+@media (max-width: 1024px) {
+  .flex {
+    gap: 1rem; /* Reduce gap between the wheel and movie list */
   }
 
-  .search-container {
-    padding: 10px;
+  .scrollable-box {
+    max-height: 400px; /* Adjust height for tablets */
+  }
+
+  .wheel-container {
+    max-width: 400px; /* Adjust wheel size for tablets */
+  }
+}
+
+/* Large devices (desktops, min-width: 1025px) */
+@media (min-width: 1025px) {
+  .flex {
+    gap: 2rem; /* Add more spacing between the wheel and movie list */
+  }
+
+  .scrollable-box {
+    max-height: 500px; /* Increase height for larger screens */
+  }
+
+  .wheel-container {
+    max-width: 500px; /* Increase wheel size for desktops */
   }
 }

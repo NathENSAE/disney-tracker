@@ -118,7 +118,7 @@ export default function DisneyMovieTracker() {
                   setIsFinished(true);
                 }}
                 buttonText="Spin"
-                size={300}
+                size={280}
                 fontSize="0.6em"
                 wordcut={30}
                 upDuration={20}
@@ -172,7 +172,6 @@ export default function DisneyMovieTracker() {
                     <Button
                       className="watch-button"
                       onClick={() => toggleWatched(movie)}
-                      data-tooltip={watched.has(movie) ? "Non vu" : "Vu"}
                     >
                       {watched.has(movie) ? "Vu" : "Pas vu"}
                     </Button>
