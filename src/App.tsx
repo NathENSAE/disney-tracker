@@ -100,35 +100,49 @@ export default function DisneyMovieTracker() {
   };
 
   return (
-    <div className="container mx-auto p-4">
-      <h1 className="text-3xl font-semibold text-center mb-4">Disney Movie Tracker</h1>
+    <div>
+      <h1 className="text-3xl font-semibold text-center mb-4">
+        Objectif 100% Disney <span role="img" aria-label="sunglasses">😎</span>
+      </h1>
 
       {loading ? (<p>Chargement...</p>) : (
         <div className="flex">
           <div className="flex-1">
-            <WheelComponent
-              segments={filteredMovies} // Use filtered movies for the wheel
-              segColors={filteredMovies.map((_, i) => `hsl(${(i / filteredMovies.length) * 360}, 70%, 50%)`)}
-              winningSegment={""}
-              onFinished={(segment) => {
-                setRandomMovie(segment);
-                setIsFinished(true);
-              }}
-              buttonText="Spin"
-              size={300}
-              fontSize="0.6em"
-              wordcut={30}
-              upDuration={20}
-              downDuration={200}
-              isOnlyOnce={false}
-            />
+            <div className="wheel-container">
+              <WheelComponent
+                segments={filteredMovies} // Use filtered movies for the wheel
+                segColors={filteredMovies.map((_, i) => `hsl(${(i / filteredMovies.length) * 360}, 70%, 50%)`)}
+                winningSegment={""}
+                onFinished={(segment) => {
+                  setRandomMovie(segment);
+                  setIsFinished(true);
+                }}
+                buttonText="Spin"
+                size={300}
+                fontSize="0.6em"
+                wordcut={30}
+                upDuration={20}
+                downDuration={200}
+                isOnlyOnce={false}
+              />
+            </div>
             {isFinished && randomMovie && (
-              <div className="text-center mt-4">
+                <div className="text-center mt-4">
                 <p className="text-lg font-semibold">{randomMovie}</p>
                 {movieImages[randomMovie] && (
-                  <img src={movieImages[randomMovie]} alt={randomMovie} className="mt-2 rounded-lg shadow-lg w-40 mx-auto" />
+                  <a
+                  href={`https://www.google.com/search?q=Disney+plus+${encodeURIComponent(randomMovie)}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  >
+                  <img
+                    src={movieImages[randomMovie]}
+                    alt={randomMovie}
+                    className="movie-image shadow-lg w-40 mx-auto"
+                  />
+                  </a>
                 )}
-              </div>
+                </div>
             )}
           </div>
           <div className="flex-1">
@@ -142,27 +156,32 @@ export default function DisneyMovieTracker() {
                 className="search-input"
               />
             </div>
-            <ul className="mb-4">
-              {filteredMovies.map((movie) => (
-                <li key={movie} className="flex items-center justify-between p-2 border-b">
+            <div className="scrollable-box">
+              <ul className="mb-4">
+                {filteredMovies
+                .slice()
+                .sort((a, b) => a.localeCompare(b)) // Sort movies by name
+                .map((movie) => (
+                  <li key={movie} className="flex items-center justify-between p-2 border-b">
                   <div className="flex items-center movie-item">
                     {movieImages[movie] && (
-                      <img src={movieImages[movie]} alt={movie} className="movie-image" />
+                    <img src={movieImages[movie]} alt={movie} className="movie-image" />
                     )}
                     <div className="movie-info flex">
-                      <p className="font-semibold">{movie}</p>
-                      <Button
-                        className="watch-button"
-                        onClick={() => toggleWatched(movie)}
-                        data-tooltip={watched.has(movie) ? "Non vu" : "Vu"}
-                      >
-                        {watched.has(movie) ? "Vu" : "Non vu"}
-                      </Button>
+                    <p className="font-semibold">{movie}</p>
+                    <Button
+                      className="watch-button"
+                      onClick={() => toggleWatched(movie)}
+                      data-tooltip={watched.has(movie) ? "Non vu" : "Vu"}
+                    >
+                      {watched.has(movie) ? "Vu" : "Pas vu"}
+                    </Button>
                     </div>
                   </div>
-                </li>
-              ))}
-            </ul>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
         </div>
       )}
