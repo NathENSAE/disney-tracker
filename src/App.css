@@ -1,0 +1,194 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+  background-color: #1a1a1a; /* Dark mode background */
+  color: white;
+  font-family: 'Arial', sans-serif;
+}
+
+body {
+  background-color: #1a1a1a;
+  color: white;
+  min-height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+h1 {
+  margin-bottom: 1rem;
+}
+
+/* 🎡 Wheel Styling */
+.wheel-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* 🎬 Movie List Styling */
+.movie-list {
+  list-style: none;
+  padding: 0;
+}
+
+.movie-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px;
+  margin-bottom: 12px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  transition: all 0.3s ease-in-out;
+  gap: 12px; /* Adds space between elements */
+}
+
+.movie-item:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* 🖼️ Movie Image */
+.movie-image {
+  width: 100px;
+  height: 120px;
+  object-fit: cover;
+  box-shadow: 0px 4px 10px rgba(255, 255, 255, 0.3);
+  transition: transform 0.3s ease;
+  padding: 0 10px;
+  border-radius: 8px; /* Makes the border round */
+}
+
+.movie-image:hover {
+  transform: scale(1.1);
+}
+
+/* 📌 Movie Title & Button Layout */
+.movie-info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+}
+
+/* ✅ Watch Button */
+.watch-button {
+  position: relative; /* Ensures the tooltip doesn’t overflow */
+  padding: 8px 14px;
+  font-size: 0.9rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 6px;
+  background: linear-gradient(135deg, #ff7eb3, #ff758c);
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+.watch-button:hover {
+  background: linear-gradient(135deg, #ff6584, #ff4d6d);
+  transform: scale(1.05);
+}
+
+/* 📌 Tooltip Fix */
+.watch-button:hover::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: 110%; /* Moves tooltip above button */
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 6px 10px;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  white-space: nowrap;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.watch-button:hover::after {
+  opacity: 1;
+}
+
+/* Container for the search bar */
+.search-container {
+  width: 100%;
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 10px 20px;
+  text-align: center;
+  position: relative;
+}
+
+/* The input field itself */
+.search-input {
+  width: 100%;
+  padding: 12px 15px;
+  font-size: 16px;
+  border-radius: 30px;
+  border: 1px solid #ddd;
+  background-color: #f9f9f9;
+  color: #1a1a1a;
+  outline: none;
+  transition: all 0.3s ease;
+  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Focus effect */
+.search-input:focus {
+  border-color: #4CAF50;
+  background-color: #fff;
+  box-shadow: 0px 0px 8px rgba(0, 128, 0, 0.2);
+}
+
+/* Placeholder styling */
+.search-input::placeholder {
+  color: #888;
+  font-style: italic;
+}
+
+/* Icon inside the input */
+.search-input::before {
+  content: '\1F50D'; /* Unicode for magnifying glass */
+  font-size: 20px;
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #888;
+  pointer-events: none;
+}
+
+/* Adding some padding to give space for the icon */
+.search-input-wrapper {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+}
+
+
+/* 🌀 Responsive Design */
+@media (max-width: 768px) {
+  .movie-item {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .movie-image {
+    margin-bottom: 8px;
+  }
+
+  .search-container {
+    padding: 10px;
+  }
+}
