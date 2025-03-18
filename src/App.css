@@ -291,6 +291,10 @@ h1 {
     font-size: 0.85rem;
     padding: 10px;
   }
+
+  .filter-buttons {
+    background-color: #1a1a1a !important;
+  }
 }
 
 /* Medium devices (tablets, max-width: 1024px) */
