@@ -50,7 +50,6 @@ export default function DisneyMovieTracker() {
   
     movieList.sort(() => Math.random() - 0.5); // Shuffle the movie list
     setMovies(movieList);
-    console.log(movies);
     setFilteredMovies(movieList); // Initially show all movies
   };
 
@@ -126,7 +125,7 @@ export default function DisneyMovieTracker() {
                 setIsFinished(true);
               }}
               buttonText="Spin"
-              size={window.innerWidth < 768 ? 200 : 280} // Adjust size based on screen width
+              size={window.innerWidth < 768 ? 180 : 280} // Adjust size based on screen width
               fontSize={window.innerWidth < 768 ? "0.5em" : "0.6em"} // Adjust font size for smaller screens
               wordcut={30}
               upDuration={20}

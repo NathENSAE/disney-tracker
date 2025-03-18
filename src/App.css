@@ -239,22 +239,57 @@ h1 {
 /* Small devices (phones, max-width: 768px) */
 @media (max-width: 768px) {
   .flex {
-    flex-direction: column; /* Stack the wheel and movie list vertically */
+    flex-direction: column; /* Stack elements vertically */
     align-items: center;
+    gap: 1rem; /* Add spacing */
+  }
+
+  .flex-1 {
+    width: 100%;
+    max-width: 100%;
+    text-align: center;
+  }
+
+  .search-container {
+    width: 90%; /* Use most of the screen width */
+    max-width: 500px;
+    margin-bottom: 1rem;
   }
 
   .scrollable-box {
-    max-height: 300px; /* Reduce height for smaller screens */
+    max-height: 250px; /* Reduce height for smaller screens */
+    width: 90%;
+    overflow-y: auto;
   }
 
   .wheel-container {
     width: 100%;
-    max-width: 300px; /* Limit the wheel size */
+    max-width: 250px; /* Adjust wheel size */
+  }
+
+  .movie-list {
+    width: 90%;
+    padding: 0;
+  }
+
+  .movie-item {
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+    gap: 8px;
+    text-align: center;
   }
 
   .movie-image {
-    width: 100px;
-    height: 140px; /* Adjust image size for smaller screens */
+    width: 80px;
+    height: 120px;
+    border-radius: 6px;
+  }
+
+  .watch-button {
+    width: 80%;
+    font-size: 0.85rem;
+    padding: 10px;
   }
 }
 
