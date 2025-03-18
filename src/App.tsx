@@ -110,20 +110,20 @@ export default function DisneyMovieTracker() {
           <div className="flex-1">
             <div className="wheel-container">
               <WheelComponent
-                segments={filteredMovies} // Use filtered movies for the wheel
-                segColors={filteredMovies.map((_, i) => `hsl(${(i / filteredMovies.length) * 360}, 70%, 50%)`)}
-                winningSegment={""}
-                onFinished={(segment) => {
-                  setRandomMovie(segment);
-                  setIsFinished(true);
-                }}
-                buttonText="Spin"
-                size={280}
-                fontSize="0.6em"
-                wordcut={30}
-                upDuration={20}
-                downDuration={200}
-                isOnlyOnce={false}
+              segments={filteredMovies} // Use filtered movies for the wheel
+              segColors={filteredMovies.map((_, i) => `hsl(${(i / filteredMovies.length) * 360}, 70%, 50%)`)}
+              winningSegment={""}
+              onFinished={(segment) => {
+                setRandomMovie(segment);
+                setIsFinished(true);
+              }}
+              buttonText="Spin"
+              size={window.innerWidth < 768 ? 200 : 280} // Adjust size based on screen width
+              fontSize={window.innerWidth < 768 ? "0.5em" : "0.6em"} // Adjust font size for smaller screens
+              wordcut={30}
+              upDuration={20}
+              downDuration={200}
+              isOnlyOnce={false}
               />
             </div>
             {isFinished && randomMovie && (
