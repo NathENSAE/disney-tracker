@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import WheelComponent from "./components/custom/WheelComponent";
 import "./App.css";
-import { doc, setDoc, getDoc, updateDoc } from "firebase/firestore";
+import { doc, collection, setDoc, getDoc, getDocs, updateDoc } from "firebase/firestore";
 import { db } from "@/firebaseConfig"; // Import Firestore instance
 
 const TMDB_API_KEY = "a352d8dd69841aa3d51bffbdc6088fe4";
@@ -20,33 +20,39 @@ export default function DisneyMovieTracker() {
   const [searchQuery, setSearchQuery] = useState(""); // State for search query
 
   useEffect(() => {
-    fetch("/disney_titles.txt")
-      .then((res) => res.text())
-      .then((text) => {
-        const movieList = text.split("\n").map((title) => title.trim()).filter((title) => title !== "");
-        movieList.sort(() => Math.random() - 0.5);
-        setMovies(movieList);
-        setFilteredMovies(movieList); // Initially show all movies
-        setLoading(false);
-        return movieList;
-      })
-      .then(fetchMovieImages) // Fetch images after setting movies
-      .catch((error) => {
-        console.error("Fetch error:", error);
-        setLoading(false);
-      });
+    loadWatchedMovies();
+    loadMovies();
   }, []);
 
   useEffect(() => {
-    const loadWatchedMovies = async () => {
-      const docRef = doc(db, "movies", "watched");
-      const docSnap = await getDoc(docRef);
-      if (docSnap.exists()) {
-        setWatched(new Set(docSnap.data().movies));
-      }
-    };
-    loadWatchedMovies();
-  }, []);  
+    if (movies.length > 0) {
+      fetchMovieImages(movies); // Fetch movie images after `movies` is updated
+      setLoading(false); // Set loading to false after movies are loaded
+    }
+  }, [movies]); // Runs whenever `movies` is updated
+
+  const loadWatchedMovies = async () => {
+    const docRef = doc(db, "movies", "watched");
+    const docSnap = await getDoc(docRef);
+    if (docSnap.exists()) {
+      setWatched(new Set(docSnap.data().movies));
+    }
+  };
+  
+  const loadMovies = async () => {
+    const moviesCollection = collection(db, "movies"); // Reference the "movies" collection
+    const querySnapshot = await getDocs(moviesCollection); // Fetch all documents in the collection
+  
+    const movieList: string[] = [];
+    querySnapshot.forEach((doc) => {
+      movieList.push(doc.id); // Use the document ID as the movie name
+    });
+  
+    movieList.sort(() => Math.random() - 0.5); // Shuffle the movie list
+    setMovies(movieList);
+    console.log(movies);
+    setFilteredMovies(movieList); // Initially show all movies
+  };
 
   // Fetch movie posters from TMDb API
   const fetchMovieImages = async (movieList: string[]) => {
@@ -110,8 +116,10 @@ export default function DisneyMovieTracker() {
           <div className="flex-1">
             <div className="wheel-container">
               <WheelComponent
-              segments={filteredMovies} // Use filtered movies for the wheel
-              segColors={filteredMovies.map((_, i) => `hsl(${(i / filteredMovies.length) * 360}, 70%, 50%)`)}
+              segments={movies.filter((movie) => !watched.has(movie))}
+              segColors={movies
+                .filter((movie) => !watched.has(movie))
+                .map((_, i) => `hsl(${(i / filteredMovies.length) * 360}, 70%, 50%)`)}
               winningSegment={""}
               onFinished={(segment) => {
                 setRandomMovie(segment);
@@ -155,6 +163,31 @@ export default function DisneyMovieTracker() {
                 onChange={handleSearchChange}
                 className="search-input"
               />
+            </div>
+            <div className="filter-buttons">
+              <Button
+                onClick={() => setFilteredMovies(movies)}
+                className="mr-2"
+              >
+                Tout
+              </Button>
+              <Button
+                onClick={() => {
+                  const filtered = movies.filter((movie) => watched.has(movie));
+                  setFilteredMovies(filtered);
+                }}
+                className="mr-2"
+              >
+                Vu
+              </Button>
+              <Button
+                onClick={() => {
+                  const filtered = movies.filter((movie) => !watched.has(movie));
+                  setFilteredMovies(filtered);
+                }}
+              >
+                Pas vu
+              </Button>
             </div>
             <div className="scrollable-box">
               <ul className="mb-4">
