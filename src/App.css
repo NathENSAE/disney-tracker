@@ -292,7 +292,7 @@ h1 {
     padding: 10px;
   }
 
-  .filter-buttons {
+  .filter-buttons Button {
     background-color: #1a1a1a !important;
   }
 }
