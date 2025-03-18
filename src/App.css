@@ -232,6 +232,7 @@ h1 {
   justify-content: center;
   gap: 1rem;
   margin-bottom: 1rem;
+  background-color: #1a1a1a;
 }
 
 
@@ -243,7 +244,6 @@ h1 {
   }
 
   .scrollable-box {
-    width: 100%; /* Make the movie list take full width */
     max-height: 300px; /* Reduce height for smaller screens */
   }
 
