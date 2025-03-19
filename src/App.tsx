@@ -15,7 +15,7 @@ export default function App() {
   const [randomMovie, setRandomMovie] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
   const [isFinished, setIsFinished] = useState(false);
-  const [searchQuery, setSearchQuery] = useState("");
+  const [, setSearchQuery] = useState("");
 
   useEffect(() => {
     loadWatchedMovies();
