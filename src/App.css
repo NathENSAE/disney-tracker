@@ -3,16 +3,16 @@
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
-  background-color: #1a1a1a; /* Dark mode background */
+  background-color: #0f1e4a; /* A darker and deeper blue shade */
   color: white;
   font-family: 'Arial', sans-serif;
 }
 
 body {
-  background-color: #1a1a1a;
+  background-color: #0f1e4a;
   color: white;
   min-height: 100vh;
-  width: 100vw;
+  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -45,8 +45,6 @@ h1 {
   display: flex;
   flex-direction: column;
   align-items: center;
-  min-width: 300px; /* Ensure each column has a minimum width */
-  max-width: 600px; /* Limit the maximum width */
 }
 
 /* 🎡 Wheel Styling */
@@ -130,27 +128,6 @@ h1 {
   transform: scale(1.05);
 }
 
-/* 📌 Tooltip Fix */
-.watch-button:hover::after {
-  content: attr(data-tooltip);
-  position: absolute;
-  bottom: 110%; /* Moves tooltip above button */
-  left: 50%;
-  transform: translateX(-50%);
-  background: rgba(0, 0, 0, 0.8);
-  color: white;
-  padding: 6px 10px;
-  border-radius: 4px;
-  font-size: 0.8rem;
-  white-space: nowrap;
-  opacity: 0;
-  transition: opacity 0.3s ease-in-out;
-}
-
-.watch-button:hover::after {
-  opacity: 1;
-}
-
 /* Container for the search bar */
 .search-container {
   width: 100%;
@@ -232,7 +209,7 @@ h1 {
   justify-content: center;
   gap: 1rem;
   margin-bottom: 1rem;
-  background-color: #1a1a1a;
+  background-color: #0f1e4a;
 }
 
 
@@ -325,4 +302,15 @@ h1 {
   .wheel-container {
     max-width: 500px; /* Increase wheel size for desktops */
   }
+}
+
+.mr-2 {
+  margin-right: 0.5rem;
+  background-color: #4562bb;
+  transition: all 0.3s ease-in-out;
+}
+
+.mr-2:hover {
+  background-color: #3a4b8f;
+ transform: scale(1.05);
 }
