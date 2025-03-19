@@ -7,9 +7,9 @@ const Sidebar = () => {
 
   return (
     <div
-      className={`fixed top-0 left-0 h-screen bg-gray-900 text-white overflow-hidden transition-[width] duration-300 ${
+      className={`fixed top-0 left-0 bg-gray-900 text-white transition-[width] duration-300 ${
         isOpen ? "w-48" : "w-16"
-      }`}
+      } h-auto max-h-screen overflow-y-auto`}
     >
       <button
         onClick={() => setIsOpen(!isOpen)}
