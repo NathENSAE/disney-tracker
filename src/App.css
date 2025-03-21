@@ -314,3 +314,7 @@ h1 {
   background-color: #3a4b8f;
  transform: scale(1.05);
 }
+
+.important-bg {
+  background-color: rgba(0, 0, 0, 0.1) !important;
+}

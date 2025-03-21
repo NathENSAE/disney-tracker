@@ -14,7 +14,7 @@ const Sidebar = () => {
     >
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="p-3 w-full text-center bg-gray-800 hover:bg-gray-700 transition"
+        className="p-3 w-full text-center bg-gray-800 hover:bg-gray-700 transition important-bg"
       >
         {isOpen ? <X size={24} /> : <Menu size={24} />}
       </button>
