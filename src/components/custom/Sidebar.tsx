@@ -10,6 +10,7 @@ const Sidebar = () => {
       className={`fixed top-0 left-0 bg-gray-900 text-white transition-[width] duration-300 ${
         isOpen ? "w-48" : "w-16"
       } h-auto max-h-screen overflow-y-auto`}
+      style={{ overflowX: "hidden" }}
     >
       <button
         onClick={() => setIsOpen(!isOpen)}
@@ -17,8 +18,7 @@ const Sidebar = () => {
       >
         {isOpen ? <X size={24} /> : <Menu size={24} />}
       </button>
-
-      <nav className="flex flex-col gap-4 mt-4">
+      <nav>
         <Link
           to="/"
           className="flex items-center p-3 hover:bg-gray-700 transition"
