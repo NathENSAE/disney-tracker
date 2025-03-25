@@ -318,3 +318,11 @@ h1 {
 .important-bg {
   background-color: rgba(0, 0, 0, 0.1) !important;
 }
+
+.counter-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 1rem;
+}

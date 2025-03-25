@@ -89,6 +89,12 @@ export default function Home({
 
             {/* Right Column: Movie List */}
             <div className="flex-1">
+              {/* Counter */}
+              <div className="counter-container">
+                <p className="text-lg">
+                  Il en reste seulement {movies.length - watched.size}/{movies.length} !!
+                </p>
+              </div>
               {/* Search Bar */}
               <div className="search-container">
                 <input
