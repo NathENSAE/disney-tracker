@@ -52,20 +52,41 @@ export default function App() {
   };
 
   const fetchMovieImages = async (movieList: string[]) => {
-    const images: Record<string, string> = {};
+    const updatedImages: Record<string, string> = {};
+  
     for (const movie of movieList) {
-      let res = await fetch(`https://api.themoviedb.org/3/search/movie?api_key=a352d8dd69841aa3d51bffbdc6088fe4&query=${encodeURIComponent(movie + " disney")}`);
-      let data = await res.json();
-      if (data.results.length === 0) {
-        res = await fetch(`https://api.themoviedb.org/3/search/movie?api_key=a352d8dd69841aa3d51bffbdc6088fe4&query=${encodeURIComponent(movie)}`);
-        data = await res.json();
+      const movieRef = doc(db, "movies", movie);
+      const movieSnap = await getDoc(movieRef);
+  
+      if (movieSnap.exists() && movieSnap.data().posterPath) {
+        updatedImages[movie] = movieSnap.data().posterPath;
+      } else {
+        let res = await fetch(
+          `https://api.themoviedb.org/3/search/movie?api_key=a352d8dd69841aa3d51bffbdc6088fe4&query=${encodeURIComponent(movie + " disney")}`
+        );
+        let data = await res.json();
+  
+        if (data.results.length === 0) {
+          res = await fetch(
+            `https://api.themoviedb.org/3/search/movie?api_key=a352d8dd69841aa3d51bffbdc6088fe4&query=${encodeURIComponent(movie)}`
+          );
+          data = await res.json();
+        }
+  
+        if (data.results.length > 0) {
+          const posterPath = `https://image.tmdb.org/t/p/w500${data.results[0].poster_path}`;
+          updatedImages[movie] = posterPath;
+          await setDoc(movieRef, { posterPath }, { merge: true });
+        }
       }
-      if (data.results.length > 0) {
-        images[movie] = `https://image.tmdb.org/t/p/w500${data.results[0].poster_path}`;
-      }
+  
+      // Update state progressively
+      setMovieImages((prev) => ({
+        ...prev,
+        ...updatedImages,
+      }));
     }
-    setMovieImages(images);
-  };
+  };  
 
   const toggleWatched = async (movie: string) => {
     setWatched((prev) => {

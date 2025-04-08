@@ -150,6 +150,7 @@ export default function Home({
                               src={movieImages[movie]}
                               alt={movie}
                               className="movie-image"
+                              loading="lazy"
                             />
                           )}
                           <div className="movie-info flex">
