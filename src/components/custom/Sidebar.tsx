@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Home, Image, Menu, X, Castle } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { Button } from "@/components/ui/button"; // Assuming you might have a Button component, or we stick to raw for nav items to customize fully
+
 
 const Sidebar = () => {
   const [isOpen, setIsOpen] = useState(false);
