@@ -260,7 +260,9 @@ const WheelComponent = ({
         width={dimension}
         height={dimension}
         style={{
-          pointerEvents: isFinished && isOnlyOnce ? 'none' : 'auto'
+          pointerEvents: isFinished && isOnlyOnce ? 'none' : 'auto',
+          maxWidth: '100%',
+          height: 'auto'
         }}
       />
     </div>

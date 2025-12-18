@@ -35,7 +35,7 @@ export default function Home() {
   );
 
   return (
-    <div className="flex flex-col md:flex-row h-full min-h-screen gap-6 p-6">
+    <div className="flex flex-col md:flex-row h-full min-h-screen gap-6 p-4 md:p-6">
 
       {/* Left Column: Movie List */}
       <div className="flex-1 flex flex-col space-y-4 h-full overflow-hidden order-2 md:order-1">
@@ -65,7 +65,7 @@ export default function Home() {
                   onChange={handleSearchChange}
                 />
               </div>
-              <div className="flex gap-2">
+              <div className="flex gap-2 flex-wrap justify-center sm:justify-start">
                 <Badge
                   variant={selectedFilter === 'all' ? "default" : "outline"}
                   className="cursor-pointer py-2 hover:bg-primary/90"
@@ -103,7 +103,7 @@ export default function Home() {
 
         {/* Scrollable Movie Grid */}
         <div className="flex-1 overflow-y-auto pr-2">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 pb-20">
+          <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-4 pb-20">
             {filteredMovies
               .sort((a, b) => a.localeCompare(b))
               .map((movie) => (
@@ -127,9 +127,9 @@ export default function Home() {
                       </Badge>
                     </div>
                   </div>
-                  <CardFooter className="p-3 bg-card/90">
+                  <CardFooter className="p-2 md:p-3 bg-card/90">
                     <div className="flex w-full items-center justify-between gap-2">
-                      <span className="text-sm font-medium truncate flex-1" title={movie}>
+                      <span className="text-xs md:text-sm font-medium truncate flex-1" title={movie}>
                         {movie}
                       </span>
                       <button
@@ -152,12 +152,12 @@ export default function Home() {
       </div>
 
       {/* Right Column (Now Order 2): Wheel & Random Result */}
-      <div className="flex-1 flex flex-col items-center justify-start space-y-6 order-1 md:order-2">
-        <h1 className="text-4xl font-bold bg-gradient-to-r from-blue-400 to-purple-600 bg-clip-text text-transparent text-center">
+      <div className="flex-none md:flex-1 flex flex-col items-center justify-start space-y-6 order-1 md:order-2">
+        <h1 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-blue-400 to-purple-600 bg-clip-text text-transparent text-center mt-8 md:mt-0">
           Disney Tracker
         </h1>
 
-        <div className="relative w-full max-w-[500px] flex justify-center py-8">
+        <div className="relative w-full max-w-[500px] flex justify-center py-4 md:py-8">
           {/* Wheel Container */}
           {loading ? (
             <div className="flex items-center justify-center h-64">
@@ -165,7 +165,7 @@ export default function Home() {
             </div>
           ) : (
             spinSegments.length > 0 ? (
-              <div className="scale-75 md:scale-100 transition-transform">
+              <div className="scale-90 md:scale-100 transition-transform">
                 <WheelComponent
                   segments={wheelSegments}
                   segColors={wheelColors}
@@ -175,7 +175,7 @@ export default function Home() {
                     setIsFinished(true);
                   }}
                   buttonText="SPIN"
-                  size={250}
+                  size={window.innerWidth < 768 ? 200 : 250}
                   fontSize="0.8em"
                   wordcut={30}
                   upDuration={100}
